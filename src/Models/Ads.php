@@ -31,7 +31,7 @@ class Ads extends Model
         /**
          * @var Collection<int, Ads>
          */
-        $ads = Ads::all();
+        $ads = new Collection();
 
         $campaigns = AdsCampaign::all();
         $sets = AdsAdset::all();
