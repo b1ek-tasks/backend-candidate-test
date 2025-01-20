@@ -1,4 +1,5 @@
 volumes:
+    php-vendor:
     dbbase:
     mariadb:
         driver: local
@@ -11,7 +12,6 @@ services:
     nginx:
         build:
             context: ./docker/development/nginx
-        container_name: nginx
         environment:
             - VIRTUAL_HOST=candidate.local
         ports:
@@ -19,31 +19,22 @@ services:
         volumes:
             - ./:/app:rw
         depends_on:
-            - api-php-fpm
+            - php
             - mariadb
         networks:
             internal:
 
-    api-php-fpm:
+    php:
         build:
             context: ./docker/development/php-fpm
-        container_name: api-php-fpm
         volumes:
             - ./:/app:rw
+            - php-vendor:/app/vendor
         networks:
             internal:
 
-    api-php-cli:
-        build:
-            context: ./docker/development/php-cli
-        container_name: api-php-cli
-        volumes:
-            - ./:/app:rw
-
     mariadb:
         image: mariadb
-        container_name: mariadb
-        restart: always
         command: --default-authentication-plugin=mysql_native_password --innodb_use_native_aio=0
         environment:
             MYSQL_ROOT_PASSWORD: jsd_k7tg
@@ -60,7 +51,6 @@ services:
 
     phpmyadmin:
         image: phpmyadmin:latest
-        container_name: pma
         links:
             - mariadb
         environment:

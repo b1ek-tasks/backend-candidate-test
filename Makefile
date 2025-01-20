@@ -1,22 +1,18 @@
-init: docker-down docker-pull docker-build docker-up docker-composer
-up: docker-up
-down: docker-down
-restart: down up
-composer: docker-composer
+init: down up install
 
-docker-up:
+
+up:
 	docker-compose up -d
 
-docker-down:
-	docker-compose down --remove-orphans
+down:
+	docker-compose down -t0
 
-docker-pull:
-	docker-compose pull
+restart:
+	docker-compose restart
 
-docker-build:
-	docker-compose build
+composer:
+	docker-composer
 
-docker-composer:
-	docker-compose run --rm api-php-cli composer install
-
+install:
+	docker-compose exec php composer install
 
