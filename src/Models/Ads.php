@@ -16,6 +16,7 @@ class Ads extends Model
         'id',
         'date',
         'expenditures',
+        'ad_id',
         'title',
         'campaign',
         'set',
@@ -58,14 +59,11 @@ class Ads extends Model
             if ($index == 0) {
                 continue;
             }
-            if ($ads->contains((int) $row[2])) {
-                continue;
-            }
 
             $ads->push(new Ads([
-                'id' => (int) $row[2],
                 'date' => $row[0],
                 'expenditures' => $row[1],
+                'ad_id' => (int) $row[2],
                 'title' => $row[3],
                 'campaign' => $row[4],
                 'set' => $row[6],

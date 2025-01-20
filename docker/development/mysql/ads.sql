@@ -14,9 +14,10 @@ CREATE TABLE IF NOT EXISTS `ads`.`campaigns`
 
 CREATE TABLE IF NOT EXISTS `ads`.`ads`
 (
-    `id` BIGINT NOT NULL,
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
     `date` DATE NOT NULL,
     `expenditures` DOUBLE NOT NULL,
+    `ad_id` BIGINT NOT NULL,
     `title` VARCHAR(255) NOT NULL,
     `campaign` BIGINT NOT NULL,
     `set` BIGINT NOT NULL,
