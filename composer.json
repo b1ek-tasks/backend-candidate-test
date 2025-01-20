@@ -21,6 +21,7 @@
     ],
     "require": {
         "php": "^8.0",
+        "guzzlehttp/guzzle": "^7.9",
         "illuminate/database": "*",
         "monolog/monolog": "^2.9",
         "php-di/php-di": "^6.4",
